@@ -13,11 +13,17 @@ struct TodoView: View {
 
     var body: some View {
         VStack {
-            Button {
-                viewModel.onTapAddButton()
-            } label: {
-                Text("追加")
+            HStack {
+                TextField("内容を入力してください", text: $viewModel.inputContent)
+                    .textFieldStyle(.roundedBorder)
+
+                Button {
+                    viewModel.onTapAddButton()
+                } label: {
+                    Text("追加")
+                }
             }
+            .padding()
 
             List {
                 ForEach(0 ..< Int(viewModel.todoItemList.items.size), id: \.self) { index in

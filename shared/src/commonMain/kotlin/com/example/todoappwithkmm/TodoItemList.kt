@@ -8,7 +8,6 @@ class TodoItemList(items: Array<TodoItem>) {
         fun createEmpty(): TodoItemList {
             return TodoItemList(items = emptyArray<TodoItem>())
         }
-
     }
 
     fun addNewItem(name: String): TodoItemList {
