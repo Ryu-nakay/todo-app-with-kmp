@@ -32,12 +32,14 @@ struct TodoView: View {
                         Text("\(viewModel.todoItemList.items.get(index: Int32(index))?.name ?? "")")
                         Spacer()
                         Button {
-
+                            viewModel.onTapStateImageButton(index: index)
                         } label: {
                             if(viewModel.todoItemList.items.get(index: Int32(index))?.state == TodoItem.State.todo) {
                                 Image(systemName: "circle")
+                                    .foregroundColor(.red)
                             } else {
                                 Image(systemName: "checkmark.circle")
+                                    .foregroundColor(.green)
                             }
                         }
                     }

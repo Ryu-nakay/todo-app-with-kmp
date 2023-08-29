@@ -15,4 +15,12 @@ class TodoItemList(items: Array<TodoItem>) {
         val newItems = this.items + arrayOf(newItem)
         return TodoItemList(items = newItems)
     }
+
+    fun toggleItemState(index: Int): TodoItemList {
+        val newItem = this.items[index].toggleState()
+        val mutableItems = this.items.toMutableList()
+        mutableItems[index] = newItem
+        val newItems = mutableItems.toTypedArray()
+        return TodoItemList(items = newItems)
+    }
 }

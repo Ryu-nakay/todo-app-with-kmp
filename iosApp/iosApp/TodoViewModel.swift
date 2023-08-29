@@ -17,4 +17,8 @@ class TodoViewModel: ObservableObject {
         todoItemList = todoItemList.addNewItem(name: inputContent)
         inputContent = ""
     }
+
+    func onTapStateImageButton(index: Int) {
+        todoItemList = todoItemList.toggleItemState(index: Int32(index))
+    }
 }
