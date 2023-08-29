@@ -10,10 +10,15 @@ import Foundation
 import shared
 
 class TodoViewModel: ObservableObject {
-    let todoItemList = TodoItemList()
+    @Published var todoItemList = TodoItemList.companion.createEmpty()
 
     init() {
-        todoItemList.addNewItem(name: "1つ目")
-        todoItemList.addNewItem(name: "2つ目")
+        todoItemList = todoItemList.addNewItem(name: "1つ目")
+        todoItemList = todoItemList.addNewItem(name: "2つ目")
+    }
+
+    func onTapAddButton() {
+        todoItemList = todoItemList.addNewItem(name: "追加分")
+        print(todoItemList.items.size)
     }
 }
