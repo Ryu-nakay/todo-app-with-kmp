@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 struct TodoView: View {
     @StateObject var viewModel = TodoViewModel()
@@ -27,7 +28,19 @@ struct TodoView: View {
 
             List {
                 ForEach(0 ..< Int(viewModel.todoItemList.items.size), id: \.self) { index in
-                    Text("\(viewModel.todoItemList.items.get(index: Int32(index))?.name ?? "")")
+                    HStack {
+                        Text("\(viewModel.todoItemList.items.get(index: Int32(index))?.name ?? "")")
+                        Spacer()
+                        Button {
+
+                        } label: {
+                            if(viewModel.todoItemList.items.get(index: Int32(index))?.state == TodoItem.State.todo) {
+                                Image(systemName: "circle")
+                            } else {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }
+                    }
                 }
             }
         }
