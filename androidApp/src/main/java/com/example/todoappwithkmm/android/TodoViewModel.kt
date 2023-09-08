@@ -14,7 +14,6 @@ class TodoViewModel: ViewModel() {
 
     fun onTapAddButton() {
         todoItemList.value = todoItemList.value?.addNewItem(inputContent.value)
-        print(todoItemList.value?.items)
         inputContent.value = ""
     }
 }

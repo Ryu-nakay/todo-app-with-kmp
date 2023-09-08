@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import com.example.todoappwithkmm.TodoItemList
 
 class MainActivity : ComponentActivity() {
@@ -46,7 +50,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TodoView(viewModel: TodoViewModel) {
-    var text by remember { mutableStateOf("") }
     val todoItemList: TodoItemList by viewModel.todoItemList.observeAsState(TodoItemList.createEmpty())
 
     Column {
@@ -55,10 +58,9 @@ fun TodoView(viewModel: TodoViewModel) {
         ) {
 
             OutlinedTextField(
-                value = text,
+                value = viewModel.inputContent.value,
                 onValueChange = {
-                    text = it
-                    viewModel.setInputContent(text)
+                    viewModel.setInputContent(it)
                 },
                 modifier = Modifier
                     .padding(16.dp)
@@ -75,7 +77,13 @@ fun TodoView(viewModel: TodoViewModel) {
 
         LazyColumn {
             items(todoItemList.items) { todoItem ->
-                Text(text = "${todoItem.name}")
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(text = "${todoItem.name}")
+                    Icon(painter = rememberVectorPainter(image = Icons.Default.CheckCircle), contentDescription = null)
+                    
+                }
             }
         }
     }
