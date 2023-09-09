@@ -16,9 +16,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.rounded.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,7 +34,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import com.example.todoappwithkmm.TodoItem
 import com.example.todoappwithkmm.TodoItemList
 
 class MainActivity : ComponentActivity() {
@@ -80,14 +84,37 @@ fun TodoView(viewModel: TodoViewModel) {
         }
 
         LazyColumn {
-            items(todoItemList.items) { todoItem ->
-                Row(modifier = Modifier.padding(20.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            itemsIndexed(todoItemList.items) {index, todoItem ->
+                Row(modifier = Modifier
+                    .padding(20.dp)
+                    .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(text = "${todoItem.name}")
                     Spacer(modifier = Modifier)
-                    Icon(painter = rememberVectorPainter(image = Icons.Default.CheckCircle), contentDescription = null)
+                    Button(onClick = {
+                        viewModel.onTapStateImageButton(index)
+                    }) {
+                        StateToggleIconImage(state = todoItem.state)
+                    }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun StateToggleIconImage(state: TodoItem.State) {
+    if (state == TodoItem.State.TODO) {
+        Icon(
+            painter = rememberVectorPainter(image = Icons.Default.Circle),
+            contentDescription = null,
+            tint = Color.Red
+        )
+    } else {
+        Icon(
+            painter = rememberVectorPainter(image = Icons.Default.CheckCircle),
+            contentDescription = null,
+            tint = Color.Green
+        )
     }
 }
 

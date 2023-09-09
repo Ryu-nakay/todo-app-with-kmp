@@ -16,4 +16,8 @@ class TodoViewModel: ViewModel() {
         todoItemList.value = todoItemList.value?.addNewItem(inputContent.value)
         inputContent.value = ""
     }
+
+    fun onTapStateImageButton(index: Int) {
+        todoItemList.value = todoItemList.value?.toggleItemState(index)
+    }
 }
