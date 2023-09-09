@@ -90,7 +90,7 @@ fun TodoView(viewModel: TodoViewModel) {
                     .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(text = "${todoItem.name}")
                     Spacer(modifier = Modifier)
-                    Button(onClick = {
+                    IconButton(onClick = {
                         viewModel.onTapStateImageButton(index)
                     }) {
                         StateToggleIconImage(state = todoItem.state)
