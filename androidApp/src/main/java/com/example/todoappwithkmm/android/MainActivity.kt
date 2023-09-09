@@ -86,7 +86,7 @@ fun TodoView(viewModel: TodoViewModel) {
         LazyColumn {
             itemsIndexed(todoItemList.items) {index, todoItem ->
                 Row(modifier = Modifier
-                    .padding(20.dp)
+                    .padding(horizontal = 20.dp)
                     .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(text = "${todoItem.name}")
                     Spacer(modifier = Modifier)
