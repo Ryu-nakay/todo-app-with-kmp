@@ -5,11 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
@@ -52,7 +56,7 @@ class MainActivity : ComponentActivity() {
 fun TodoView(viewModel: TodoViewModel) {
     val todoItemList: TodoItemList by viewModel.todoItemList.observeAsState(TodoItemList.createEmpty())
 
-    Column {
+    Column() {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -77,12 +81,10 @@ fun TodoView(viewModel: TodoViewModel) {
 
         LazyColumn {
             items(todoItemList.items) { todoItem ->
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
+                Row(modifier = Modifier.padding(20.dp).fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                     Text(text = "${todoItem.name}")
+                    Spacer(modifier = Modifier)
                     Icon(painter = rememberVectorPainter(image = Icons.Default.CheckCircle), contentDescription = null)
-                    
                 }
             }
         }
